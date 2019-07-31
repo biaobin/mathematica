@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    116561,       3200]
-NotebookOptionsPosition[    111548,       3128]
-NotebookOutlinePosition[    111968,       3146]
-CellTagsIndexPosition[    111925,       3143]
+NotebookDataLength[    117691,       3228]
+NotebookOptionsPosition[    112681,       3156]
+NotebookOutlinePosition[    113101,       3174]
+CellTagsIndexPosition[    113058,       3171]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -22,14 +22,18 @@ Cell["\<\
 @author: Biaobin Li 
 2019-07-31
 calculate the transfer map up to 2nd order for dipole and quad etc elements.
-reference: Brown_1982_SlacPub\
+reference: Brown_1982_SlacPub
+usage: run this notebook to generate transfermap.wl package, then run \
+examples/ElementsMap.nb
+to load the package for calculate sector dipole and quadrupole map.
+\
 \>", "Text",
  CellChangeTimes->{{3.7734269758003683`*^9, 3.773426982025351*^9}, {
-  3.773427845762236*^9, 3.773427860425253*^9}, {3.773510520222495*^9, 
-  3.773510521562746*^9}, {3.773511384843577*^9, 3.7735113850896807`*^9}, {
-  3.773520525137499*^9, 3.7735205342055902`*^9}, {3.773583002442894*^9, 
-  3.773583022937419*^9}, {3.773597373324799*^9, 
-  3.7735973745444317`*^9}},ExpressionUUID->"ddfbbb00-8cdc-45c6-b9cb-\
+   3.773427845762236*^9, 3.773427860425253*^9}, {3.773510520222495*^9, 
+   3.773510521562746*^9}, {3.773511384843577*^9, 3.7735113850896807`*^9}, {
+   3.773520525137499*^9, 3.7735205342055902`*^9}, {3.773583002442894*^9, 
+   3.773583022937419*^9}, {3.773597373324799*^9, 3.7735973745444317`*^9}, 
+   3.773597973784669*^9},ExpressionUUID->"ddfbbb00-8cdc-45c6-b9cb-\
 a44477f7ce76"],
 
 Cell[CellGroupData[{
@@ -1183,7 +1187,7 @@ Cell[BoxData[
         RowBox[{"kx", " ", "t"}], "]"}]}], ")"}]}], 
     SuperscriptBox["kx", "2"]]}],
   SequenceForm[
-  "R16= ", $CellContext`h $CellContext`kx^(-2) (1 - 
+  "R16= ", ($CellContext`h $CellContext`kx^(-2)) (1 - 
     Cos[$CellContext`kx $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -1197,8 +1201,8 @@ Cell[BoxData[
     RowBox[{"-", "kx"}], " ", 
     RowBox[{"Sin", "[", 
      RowBox[{"kx", " ", "t"}], "]"}]}]}],
-  SequenceForm["R21= ", -$CellContext`kx Sin[$CellContext`kx $CellContext`t]],
-  
+  SequenceForm[
+  "R21= ", (-$CellContext`kx) Sin[$CellContext`kx $CellContext`t]],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1226,7 +1230,7 @@ Cell[BoxData[
      RowBox[{"Sin", "[", 
       RowBox[{"kx", " ", "t"}], "]"}]}], "kx"]}],
   SequenceForm[
-  "R26= ", $CellContext`h $CellContext`kx^(-1) 
+  "R26= ", ($CellContext`h/$CellContext`kx) 
    Sin[$CellContext`kx $CellContext`t]],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -1262,12 +1266,12 @@ Cell[BoxData[
         FractionBox[
          RowBox[{"kx", " ", "t"}], "2"], "]"}], "2"]}], ")"}]}]}],
   SequenceForm[
-  "T111= ", Rational[2, 3] $CellContext`h 
-   Sin[Rational[
-       1, 2] $CellContext`kx $CellContext`t]^2 ($CellContext`h^2 \
-$CellContext`kx^(-2) (-1 + 2 $CellContext`n - $CellContext`\[Beta]) (2 + 
+  "T111= ", ((Rational[2, 3] $CellContext`h) 
+    Sin[(Rational[
+         1, 2] $CellContext`kx) $CellContext`t]^2) ((($CellContext`h^2 \
+$CellContext`kx^(-2)) (-1 + 2 $CellContext`n - $CellContext`\[Beta])) (2 + 
       Cos[$CellContext`kx $CellContext`t]) + 
-    Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^2)],
+    Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^2)],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1309,13 +1313,14 @@ Cell[BoxData[
      RowBox[{"3", " ", 
       SuperscriptBox["kx", "3"]}]]}]}],
   SequenceForm[
-  "T112= ", 
-   Rational[-1, 
-     3] $CellContext`h $CellContext`kx^(-3) ((-2) $CellContext`kx^2 + 
-    2 $CellContext`h^2 (1 - 
-      2 $CellContext`n + $CellContext`\[Beta]) + (-$CellContext`kx^2 + \
+  "T112= ", (((
+      Rational[-1, 
+        3] $CellContext`h) $CellContext`kx^(-3)) ((-2) $CellContext`kx^2 + (
+       2 $CellContext`h^2) (1 - 
+       2 $CellContext`n + $CellContext`\[Beta]) + (-$CellContext`kx^2 + \
 $CellContext`h^2 (-2 + 4 $CellContext`n - 2 $CellContext`\[Beta])) 
-     Cos[$CellContext`kx $CellContext`t]) Sin[$CellContext`kx $CellContext`t]],
+      Cos[$CellContext`kx $CellContext`t])) 
+   Sin[$CellContext`kx $CellContext`t]],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1364,17 +1369,17 @@ Cell[BoxData[
     RowBox[{"6", " ", 
      SuperscriptBox["kx", "4"]}]]}],
   SequenceForm[
-  "T116= ", 
-   Rational[1, 
-     6] $CellContext`h^2 $CellContext`kx^(-4) ((-8) $CellContext`kx^2 
-     Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^4 - 
-    3 $CellContext`kx^3 (-2 + $CellContext`n) $CellContext`t 
-    Sin[$CellContext`kx $CellContext`t] + 
-    2 $CellContext`h^2 (-1 + 2 $CellContext`n - $CellContext`\[Beta]) (-3 + 
+  "T116= ", ((
+     Rational[1, 
+       6] $CellContext`h^2) $CellContext`kx^(-4)) (((-8) $CellContext`kx^2) 
+     Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^4 - (((
+       3 $CellContext`kx^3) (-2 + $CellContext`n)) $CellContext`t) 
+    Sin[$CellContext`kx $CellContext`t] + ((2 $CellContext`h^2) (-1 + 
+       2 $CellContext`n - $CellContext`\[Beta])) (-3 + 
       2 Cos[$CellContext`kx $CellContext`t] + 
-      Cos[2 $CellContext`kx $CellContext`t] + 
-      3 $CellContext`kx $CellContext`t Sin[$CellContext`kx $CellContext`t]))],
-  
+      Cos[(2 $CellContext`kx) $CellContext`t] + ((
+         3 $CellContext`kx) $CellContext`t) 
+       Sin[$CellContext`kx $CellContext`t]))],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1411,11 +1416,12 @@ Cell[BoxData[
     RowBox[{"3", " ", 
      SuperscriptBox["kx", "4"]}]]}],
   SequenceForm[
-  "T122= ", Rational[1, 3] $CellContext`h $CellContext`kx^(-4) 
-   Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^2 ($CellContext`kx^2 (2 + 
-      Cos[$CellContext`kx $CellContext`t]) + 
-    4 $CellContext`h^2 (-1 + 2 $CellContext`n - $CellContext`\[Beta]) 
-     Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^2)],
+  "T122= ", (((Rational[1, 3] $CellContext`h) $CellContext`kx^(-4)) 
+    Sin[(Rational[
+         1, 2] $CellContext`kx) $CellContext`t]^2) ($CellContext`kx^2 (2 + 
+      Cos[$CellContext`kx $CellContext`t]) + ((4 $CellContext`h^2) (-1 + 
+       2 $CellContext`n - $CellContext`\[Beta])) 
+     Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^2)],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1470,18 +1476,17 @@ Cell[BoxData[
     RowBox[{"6", " ", 
      SuperscriptBox["kx", "5"]}]]}],
   SequenceForm[
-  "T126= ", 
-   Rational[1, 6] $CellContext`h^2 $CellContext`kx^(-5) (
-    3 $CellContext`kx^2 (-2 + $CellContext`n) ($CellContext`kx $CellContext`t 
-       Cos[$CellContext`kx $CellContext`t] - 
+  "T126= ", ((
+     Rational[1, 6] $CellContext`h^2) $CellContext`kx^(-5)) (((
+       3 $CellContext`kx^2) (-2 + $CellContext`n)) (($CellContext`kx \
+$CellContext`t) Cos[$CellContext`kx $CellContext`t] - 
       Sin[$CellContext`kx $CellContext`t]) + $CellContext`kx^2 (
-      2 Sin[$CellContext`kx $CellContext`t] - Sin[
-      2 $CellContext`kx $CellContext`t]) + 
-    2 $CellContext`h^2 (-1 + 
-      2 $CellContext`n - $CellContext`\[Beta]) ((-3) $CellContext`kx \
-$CellContext`t Cos[$CellContext`kx $CellContext`t] + 
+      2 Sin[$CellContext`kx $CellContext`t] - 
+      Sin[(2 $CellContext`kx) $CellContext`t]) + ((2 $CellContext`h^2) (-1 + 
+       2 $CellContext`n - $CellContext`\[Beta])) ((((-3) $CellContext`kx) \
+$CellContext`t) Cos[$CellContext`kx $CellContext`t] + 
       Sin[$CellContext`kx $CellContext`t] + 
-      Sin[2 $CellContext`kx $CellContext`t]))],
+      Sin[(2 $CellContext`kx) $CellContext`t]))],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1544,18 +1549,20 @@ Cell[BoxData[
     RowBox[{"6", " ", 
      SuperscriptBox["kx", "6"]}]]}],
   SequenceForm[
-  "T166= ", 
-   Rational[1, 6] $CellContext`h $CellContext`kx^(-6) (
-    6 $CellContext`kx^4 (-1 + Cos[$CellContext`kx $CellContext`t]) + 
-    4 $CellContext`h^2 $CellContext`kx^2 
-     Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^4 + 
-    3 $CellContext`h^2 $CellContext`kx^2 (-2 + $CellContext`n) (-2 + 
-      2 Cos[$CellContext`kx $CellContext`t] + $CellContext`kx $CellContext`t 
-       Sin[$CellContext`kx $CellContext`t]) - $CellContext`h^4 (-1 + 
-     2 $CellContext`n - $CellContext`\[Beta]) (-9 + 
+  "T166= ", ((
+     Rational[1, 6] $CellContext`h) $CellContext`kx^(-6)) ((
+      6 $CellContext`kx^4) (-1 + 
+      Cos[$CellContext`kx $CellContext`t]) + ((
+       4 $CellContext`h^2) $CellContext`kx^2) 
+     Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^4 + (((
+        3 $CellContext`h^2) $CellContext`kx^2) (-2 + $CellContext`n)) (-2 + 
+      2 Cos[$CellContext`kx $CellContext`t] + ($CellContext`kx $CellContext`t)
+         Sin[$CellContext`kx $CellContext`t]) - ($CellContext`h^4 (-1 + 
+      2 $CellContext`n - $CellContext`\[Beta])) (-9 + 
      8 Cos[$CellContext`kx $CellContext`t] + 
-     Cos[2 $CellContext`kx $CellContext`t] + 
-     6 $CellContext`kx $CellContext`t Sin[$CellContext`kx $CellContext`t]))],
+     Cos[(2 $CellContext`kx) $CellContext`t] + ((
+        6 $CellContext`kx) $CellContext`t) 
+      Sin[$CellContext`kx $CellContext`t]))],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1585,12 +1592,13 @@ Cell[BoxData[
     RowBox[{"3", " ", 
      SuperscriptBox["kx", "2"]}]]}],
   SequenceForm[
-  "T133= ", 
-   Rational[1, 3] $CellContext`h $CellContext`kx^(-2) ((-3) $CellContext`ky^2 + 
-    4 $CellContext`h^2 $CellContext`\[Beta] + 
-    2 $CellContext`h^2 $CellContext`\[Beta] 
-     Cos[$CellContext`kx $CellContext`t]) 
-   Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^2],
+  "T133= ", (((
+      Rational[1, 
+        3] $CellContext`h) $CellContext`kx^(-2)) ((-3) $CellContext`ky^2 + (
+       4 $CellContext`h^2) $CellContext`\[Beta] + ((
+        2 $CellContext`h^2) $CellContext`\[Beta]) 
+      Cos[$CellContext`kx $CellContext`t])) 
+   Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^2],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1615,11 +1623,11 @@ Cell[BoxData[
      RowBox[{"3", " ", 
       SuperscriptBox["kx", "3"]}]]}]}],
   SequenceForm[
-  "T134= ", 
-   Rational[-1, 
-     3] $CellContext`h^3 $CellContext`kx^(-3) $CellContext`\[Beta] ((-2) 
-     Sin[$CellContext`kx $CellContext`t] + 
-    Sin[2 $CellContext`kx $CellContext`t])],
+  "T134= ", (((
+      Rational[-1, 
+        3] $CellContext`h^3) $CellContext`kx^(-3)) $CellContext`\[Beta]) ((-2)
+       Sin[$CellContext`kx $CellContext`t] + 
+    Sin[(2 $CellContext`kx) $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1649,11 +1657,13 @@ Cell[BoxData[
     RowBox[{"6", " ", 
      SuperscriptBox["kx", "4"]}]]}],
   SequenceForm[
-  "T144= ", 
-   Rational[1, 6] $CellContext`h $CellContext`kx^(-4) ((-3) $CellContext`kx^2 + 
-    3 $CellContext`kx^2 Cos[$CellContext`kx $CellContext`t] + 
-    8 $CellContext`h^2 $CellContext`\[Beta] 
-     Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^4)],
+  "T144= ", ((
+     Rational[1, 
+       6] $CellContext`h) $CellContext`kx^(-4)) ((-3) $CellContext`kx^2 + (
+      3 $CellContext`kx^2) 
+     Cos[$CellContext`kx $CellContext`t] + ((
+       8 $CellContext`h^2) $CellContext`\[Beta]) 
+     Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^4)],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1682,12 +1692,12 @@ Cell[BoxData[
         RowBox[{"2", " ", "kx", " ", "t"}], "]"}]}], ")"}]}], 
     RowBox[{"3", " ", "kx"}]]}],
   SequenceForm[
-  "T211= ", 
-   Rational[1, 
-     3] $CellContext`h $CellContext`kx^(-1) ($CellContext`kx^2 + \
-$CellContext`h^2 (-1 + 2 $CellContext`n - $CellContext`\[Beta])) (
+  "T211= ", (((
+      Rational[1, 
+        3] $CellContext`h)/$CellContext`kx) ($CellContext`kx^2 + \
+$CellContext`h^2 (-1 + 2 $CellContext`n - $CellContext`\[Beta]))) (
     Sin[$CellContext`kx $CellContext`t] + 
-    Sin[2 $CellContext`kx $CellContext`t])],
+    Sin[(2 $CellContext`kx) $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1720,12 +1730,12 @@ Cell[BoxData[
     RowBox[{"3", " ", 
      SuperscriptBox["kx", "2"]}]]}],
   SequenceForm[
-  "T212= ", 
-   Rational[4, 
-     3] $CellContext`h $CellContext`kx^(-2) ($CellContext`kx^2 + \
-$CellContext`h^2 (-1 + 2 $CellContext`n - $CellContext`\[Beta])) (1 + 
-    2 Cos[$CellContext`kx $CellContext`t]) 
-   Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^2],
+  "T212= ", ((((
+       Rational[
+        4, 3] $CellContext`h) $CellContext`kx^(-2)) ($CellContext`kx^2 + \
+$CellContext`h^2 (-1 + 2 $CellContext`n - $CellContext`\[Beta]))) (1 + 
+     2 Cos[$CellContext`kx $CellContext`t])) 
+   Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^2],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1790,15 +1800,17 @@ Cell[BoxData[
      RowBox[{"6", " ", 
       SuperscriptBox["kx", "3"]}]]}]}],
   SequenceForm[
-  "T216= ", 
-   Rational[-1, 6] $CellContext`h^2 $CellContext`kx^(-3) (
-    3 $CellContext`kx $CellContext`t ($CellContext`kx^2 (-2 + $CellContext`n) + \
-$CellContext`h^2 (2 - 4 $CellContext`n + 2 $CellContext`\[Beta])) 
+  "T216= ", ((
+     Rational[-1, 
+       6] $CellContext`h^2) $CellContext`kx^(-3)) ((((
+        3 $CellContext`kx) $CellContext`t) ($CellContext`kx^2 (-2 + \
+$CellContext`n) + $CellContext`h^2 (2 - 4 $CellContext`n + 
+         2 $CellContext`\[Beta]))) 
      Cos[$CellContext`kx $CellContext`t] + ($CellContext`kx^2 (-8 + 
         3 $CellContext`n) + $CellContext`h^2 (2 - 4 $CellContext`n + 
-        2 $CellContext`\[Beta]) + 
-      8 ($CellContext`kx^2 + $CellContext`h^2 (-1 + 
-          2 $CellContext`n - $CellContext`\[Beta])) 
+        2 $CellContext`\[Beta]) + (
+        8 ($CellContext`kx^2 + $CellContext`h^2 (-1 + 
+           2 $CellContext`n - $CellContext`\[Beta]))) 
        Cos[$CellContext`kx $CellContext`t]) 
      Sin[$CellContext`kx $CellContext`t])],
   Editable->False]], "Print",
@@ -1841,13 +1853,14 @@ Cell[BoxData[
      RowBox[{"6", " ", 
       SuperscriptBox["kx", "3"]}]]}]}],
   SequenceForm[
-  "T222= ", 
-   Rational[-1, 
-     6] $CellContext`h $CellContext`kx^(-3) (-$CellContext`kx^2 + \
-$CellContext`h^2 (4 - 8 $CellContext`n + 4 $CellContext`\[Beta]) + 
-    4 ($CellContext`kx^2 + $CellContext`h^2 (-1 + 
-        2 $CellContext`n - $CellContext`\[Beta])) 
-     Cos[$CellContext`kx $CellContext`t]) Sin[$CellContext`kx $CellContext`t]],
+  "T222= ", (((
+      Rational[-1, 
+        6] $CellContext`h) $CellContext`kx^(-3)) (-$CellContext`kx^2 + \
+$CellContext`h^2 (4 - 8 $CellContext`n + 4 $CellContext`\[Beta]) + (
+       4 ($CellContext`kx^2 + $CellContext`h^2 (-1 + 
+          2 $CellContext`n - $CellContext`\[Beta]))) 
+      Cos[$CellContext`kx $CellContext`t])) 
+   Sin[$CellContext`kx $CellContext`t]],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1900,14 +1913,15 @@ Cell[BoxData[
      RowBox[{"3", " ", 
       SuperscriptBox["kx", "4"]}]]}]}],
   SequenceForm[
-  "T226= ", Rational[-1, 3] $CellContext`h^2 $CellContext`kx^(-4) 
-   Sin[Rational[1, 2] $CellContext`kx $CellContext`t] (
-    3 $CellContext`kx $CellContext`t ($CellContext`kx^2 (-2 + $CellContext`n) + \
-$CellContext`h^2 (2 - 4 $CellContext`n + 2 $CellContext`\[Beta])) 
-     Cos[Rational[1, 2] $CellContext`kx $CellContext`t] + 
-    4 ($CellContext`kx^2 + $CellContext`h^2 (-1 + 
-        2 $CellContext`n - $CellContext`\[Beta])) 
-     Sin[Rational[3, 2] $CellContext`kx $CellContext`t])],
+  "T226= ", (((Rational[-1, 3] $CellContext`h^2) $CellContext`kx^(-4)) 
+    Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]) ((((
+        3 $CellContext`kx) $CellContext`t) ($CellContext`kx^2 (-2 + \
+$CellContext`n) + $CellContext`h^2 (2 - 4 $CellContext`n + 
+         2 $CellContext`\[Beta]))) 
+     Cos[(Rational[1, 2] $CellContext`kx) $CellContext`t] + (
+      4 ($CellContext`kx^2 + $CellContext`h^2 (-1 + 
+         2 $CellContext`n - $CellContext`\[Beta]))) 
+     Sin[(Rational[3, 2] $CellContext`kx) $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -1976,19 +1990,19 @@ Cell[BoxData[
     RowBox[{"6", " ", 
      SuperscriptBox["kx", "5"]}]]}],
   SequenceForm[
-  "T266= ", 
-   Rational[1, 
-     6] $CellContext`kx^(-5) ($CellContext`h ((-6) $CellContext`kx^4 + \
-$CellContext`h^2 $CellContext`kx^2 (2 - 
-        3 $CellContext`n) + $CellContext`h^4 (-2 + 4 $CellContext`n - 
-        2 $CellContext`\[Beta])) 
-     Sin[$CellContext`kx $CellContext`t] + $CellContext`h^3 
-     Cos[$CellContext`kx $CellContext`t] (
-      3 $CellContext`kx $CellContext`t ($CellContext`kx^2 (-2 + \
+  "T266= ", (
+    Rational[1, 
+      6] $CellContext`kx^(-5)) (($CellContext`h ((-6) $CellContext`kx^4 + \
+($CellContext`h^2 $CellContext`kx^2) (2 - 
+         3 $CellContext`n) + $CellContext`h^4 (-2 + 4 $CellContext`n - 
+         2 $CellContext`\[Beta]))) 
+     Sin[$CellContext`kx $CellContext`t] + ($CellContext`h^3 
+      Cos[$CellContext`kx $CellContext`t]) (((
+         3 $CellContext`kx) $CellContext`t) ($CellContext`kx^2 (-2 + \
 $CellContext`n) + $CellContext`h^2 (2 - 4 $CellContext`n + 
-          2 $CellContext`\[Beta])) + 
-      4 ($CellContext`kx^2 + $CellContext`h^2 (-1 + 
-          2 $CellContext`n - $CellContext`\[Beta])) 
+          2 $CellContext`\[Beta])) + (
+        4 ($CellContext`kx^2 + $CellContext`h^2 (-1 + 
+           2 $CellContext`n - $CellContext`\[Beta]))) 
        Sin[$CellContext`kx $CellContext`t]))],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -2015,11 +2029,13 @@ Cell[BoxData[
       RowBox[{"kx", " ", "t"}], "]"}]}], 
     RowBox[{"6", " ", "kx"}]]}],
   SequenceForm[
-  "T233= ", 
-   Rational[1, 6] $CellContext`h $CellContext`kx^(-1) ((-3) $CellContext`ky^2 + 
-    2 $CellContext`h^2 $CellContext`\[Beta] + 
-    4 $CellContext`h^2 $CellContext`\[Beta] 
-     Cos[$CellContext`kx $CellContext`t]) Sin[$CellContext`kx $CellContext`t]],
+  "T233= ", (((
+      Rational[1, 
+        6] $CellContext`h)/$CellContext`kx) ((-3) $CellContext`ky^2 + (
+       2 $CellContext`h^2) $CellContext`\[Beta] + ((
+        4 $CellContext`h^2) $CellContext`\[Beta]) 
+      Cos[$CellContext`kx $CellContext`t])) 
+   Sin[$CellContext`kx $CellContext`t]],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -2040,10 +2056,11 @@ Cell[BoxData[
     RowBox[{"3", " ", 
      SuperscriptBox["kx", "2"]}]]}],
   SequenceForm[
-  "T234= ", 
-   Rational[2, 3] $CellContext`h^3 $CellContext`kx^(-2) $CellContext`\[Beta] (
-    Cos[$CellContext`kx $CellContext`t] - Cos[
-    2 $CellContext`kx $CellContext`t])],
+  "T234= ", (((
+      Rational[2, 
+        3] $CellContext`h^3) $CellContext`kx^(-2)) $CellContext`\[Beta]) (
+    Cos[$CellContext`kx $CellContext`t] - 
+    Cos[(2 $CellContext`kx) $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -2071,11 +2088,12 @@ Cell[BoxData[
      RowBox[{"6", " ", 
       SuperscriptBox["kx", "3"]}]]}]}],
   SequenceForm[
-  "T244= ", 
-   Rational[-1, 6] $CellContext`h $CellContext`kx^(-3) (3 $CellContext`kx^2 - 
-    4 $CellContext`h^2 $CellContext`\[Beta] + 
-    4 $CellContext`h^2 $CellContext`\[Beta] 
-     Cos[$CellContext`kx $CellContext`t]) Sin[$CellContext`kx $CellContext`t]],
+  "T244= ", (((Rational[-1, 6] $CellContext`h) $CellContext`kx^(-3)) (
+     3 $CellContext`kx^2 - (
+      4 $CellContext`h^2) $CellContext`\[Beta] + ((
+        4 $CellContext`h^2) $CellContext`\[Beta]) 
+      Cos[$CellContext`kx $CellContext`t])) 
+   Sin[$CellContext`kx $CellContext`t]],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -2116,8 +2134,8 @@ Cell[BoxData[
     RowBox[{"-", "ky"}], " ", 
     RowBox[{"Sin", "[", 
      RowBox[{"ky", " ", "t"}], "]"}]}]}],
-  SequenceForm["R43= ", -$CellContext`ky Sin[$CellContext`ky $CellContext`t]],
-  
+  SequenceForm[
+  "R43= ", (-$CellContext`ky) Sin[$CellContext`ky $CellContext`t]],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -2175,14 +2193,17 @@ Cell[BoxData[
      RowBox[{"4", " ", "kx", " ", 
       SuperscriptBox["ky", "2"]}]}]]}],
   SequenceForm[
-  "T313= ", ($CellContext`kx^3 - 4 $CellContext`kx $CellContext`ky^2)^(-1) (
-    4 $CellContext`h $CellContext`kx ($CellContext`ky^2 + $CellContext`h^2 \
-(-$CellContext`n + $CellContext`\[Beta])) Cos[$CellContext`ky $CellContext`t] 
-     Sin[Rational[
-         1, 2] $CellContext`kx $CellContext`t]^2 + $CellContext`h \
-$CellContext`ky (-$CellContext`kx^2 + 
-      4 $CellContext`h^2 ($CellContext`n - $CellContext`\[Beta])) 
-     Sin[$CellContext`kx $CellContext`t] Sin[$CellContext`ky $CellContext`t])],
+  "T313= ", ($CellContext`kx^3 - (
+      4 $CellContext`kx) $CellContext`ky^2)^(-1) (((((
+         4 $CellContext`h) $CellContext`kx) ($CellContext`ky^2 + \
+$CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta]))) 
+      Cos[$CellContext`ky $CellContext`t]) 
+     Sin[(Rational[
+          1, 2] $CellContext`kx) $CellContext`t]^2 + ((($CellContext`h \
+$CellContext`ky) (-$CellContext`kx^2 + (
+          4 $CellContext`h^2) ($CellContext`n - $CellContext`\[Beta]))) 
+      Sin[$CellContext`kx $CellContext`t]) 
+     Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -2232,13 +2253,15 @@ Cell[BoxData[
      RowBox[{"4", " ", "kx", " ", 
       SuperscriptBox["ky", "3"]}]}]]}],
   SequenceForm[
-  "T314= ", $CellContext`h (-$CellContext`kx^3 $CellContext`ky + 
-     4 $CellContext`kx $CellContext`ky^3)^(-1) (-$CellContext`ky \
-($CellContext`kx^2 + 
-      4 $CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta])) 
-     Cos[$CellContext`ky $CellContext`t] Sin[$CellContext`kx $CellContext`t] + 
-    4 $CellContext`kx ($CellContext`ky^2 + $CellContext`h^2 (-$CellContext`n + \
-$CellContext`\[Beta])) Cos[Rational[1, 2] $CellContext`kx $CellContext`t]^2 
+  "T314= ", ($CellContext`h/((-$CellContext`kx^3) $CellContext`ky + (
+      4 $CellContext`kx) $CellContext`ky^3)) ((((-$CellContext`ky) \
+($CellContext`kx^2 + (
+          4 $CellContext`h^2) (-$CellContext`n + $CellContext`\[Beta]))) 
+      Cos[$CellContext`ky $CellContext`t]) 
+     Sin[$CellContext`kx $CellContext`t] + (((
+        4 $CellContext`kx) ($CellContext`ky^2 + $CellContext`h^2 \
+(-$CellContext`n + $CellContext`\[Beta]))) 
+      Cos[(Rational[1, 2] $CellContext`kx) $CellContext`t]^2) 
      Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -2306,16 +2329,17 @@ Cell[BoxData[
       SuperscriptBox["kx", "2"], " ", 
       SuperscriptBox["ky", "3"]}]}]]}],
   SequenceForm[
-  "T323= ", $CellContext`h (-$CellContext`kx^4 $CellContext`ky + 
-     4 $CellContext`kx^2 $CellContext`ky^3)^(-1) (
-    2 $CellContext`kx $CellContext`ky ($CellContext`ky^2 + $CellContext`h^2 \
-(-$CellContext`n + $CellContext`\[Beta])) Cos[$CellContext`ky $CellContext`t] 
-     Sin[$CellContext`kx $CellContext`t] - (
-     4 $CellContext`h^2 $CellContext`ky^2 ($CellContext`n - $CellContext`\
-\[Beta]) + $CellContext`kx^2 ($CellContext`ky^2 + 
-       2 $CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta])) + \
-$CellContext`ky^2 ($CellContext`kx^2 + 
-       4 $CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta])) 
+  "T323= ", ($CellContext`h/((-$CellContext`kx^4) $CellContext`ky + (
+      4 $CellContext`kx^2) $CellContext`ky^3)) (((((
+         2 $CellContext`kx) $CellContext`ky) ($CellContext`ky^2 + \
+$CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta]))) 
+      Cos[$CellContext`ky $CellContext`t]) 
+     Sin[$CellContext`kx $CellContext`t] - (((
+        4 $CellContext`h^2) $CellContext`ky^2) ($CellContext`n - \
+$CellContext`\[Beta]) + $CellContext`kx^2 ($CellContext`ky^2 + (
+         2 $CellContext`h^2) (-$CellContext`n + $CellContext`\[Beta])) + \
+($CellContext`ky^2 ($CellContext`kx^2 + (
+          4 $CellContext`h^2) (-$CellContext`n + $CellContext`\[Beta]))) 
       Cos[$CellContext`kx $CellContext`t]) 
     Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
@@ -2367,16 +2391,16 @@ Cell[BoxData[
        RowBox[{"4", " ", 
         SuperscriptBox["ky", "2"]}]}], ")"}]}]]}],
   SequenceForm[
-  "T324= ", 
-   2 $CellContext`h $CellContext`kx^(-2) $CellContext`ky^(-1) \
-($CellContext`kx^2 - 
-     4 $CellContext`ky^2)^(-1) ($CellContext`ky ($CellContext`kx^2 + 
-      4 $CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta])) 
-     Cos[$CellContext`ky $CellContext`t] 
-     Sin[Rational[
-         1, 2] $CellContext`kx $CellContext`t]^2 - $CellContext`kx \
+  "T324= ", ((((
+       2 $CellContext`h) \
+$CellContext`kx^(-2))/$CellContext`ky)/($CellContext`kx^2 - 
+    4 $CellContext`ky^2)) ((($CellContext`ky ($CellContext`kx^2 + (
+          4 $CellContext`h^2) (-$CellContext`n + $CellContext`\[Beta]))) 
+      Cos[$CellContext`ky $CellContext`t]) 
+     Sin[(Rational[
+          1, 2] $CellContext`kx) $CellContext`t]^2 - (($CellContext`kx \
 ($CellContext`ky^2 + $CellContext`h^2 (-$CellContext`n + \
-$CellContext`\[Beta])) Sin[$CellContext`kx $CellContext`t] 
+$CellContext`\[Beta]))) Sin[$CellContext`kx $CellContext`t]) 
     Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -2447,19 +2471,19 @@ Cell[BoxData[
       SuperscriptBox["kx", "3"], " ", 
       SuperscriptBox["ky", "3"]}]}]]}],
   SequenceForm[
-  "T336= ", ((-2) $CellContext`kx^5 $CellContext`ky + 
-     8 $CellContext`kx^3 $CellContext`ky^3)^(-1) (
-    8 $CellContext`h^2 $CellContext`kx $CellContext`ky ($CellContext`ky^2 + \
-$CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta])) 
-     Cos[$CellContext`ky $CellContext`t] 
-     Sin[Rational[
-         1, 2] $CellContext`kx $CellContext`t]^2 - ($CellContext`kx \
+  "T336= ", (((-2) $CellContext`kx^5) $CellContext`ky + (
+       8 $CellContext`kx^3) $CellContext`ky^3)^(-1) ((((((
+          8 $CellContext`h^2) $CellContext`kx) $CellContext`ky) \
+($CellContext`ky^2 + $CellContext`h^2 (-$CellContext`n + \
+$CellContext`\[Beta]))) Cos[$CellContext`ky $CellContext`t]) 
+     Sin[(Rational[
+          1, 2] $CellContext`kx) $CellContext`t]^2 - ((($CellContext`kx \
 ($CellContext`kx^2 - 
-       4 $CellContext`ky^2) $CellContext`t ($CellContext`kx^2 \
-$CellContext`ky^2 + 
-       2 $CellContext`h^4 (-$CellContext`n + $CellContext`\[Beta])) - 
-     2 $CellContext`h^2 $CellContext`ky^2 (-$CellContext`kx^2 + 
-      4 $CellContext`h^2 ($CellContext`n - $CellContext`\[Beta])) 
+         4 $CellContext`ky^2)) $CellContext`t) ($CellContext`kx^2 \
+$CellContext`ky^2 + (
+         2 $CellContext`h^4) (-$CellContext`n + $CellContext`\[Beta])) - (((
+        2 $CellContext`h^2) $CellContext`ky^2) (-$CellContext`kx^2 + (
+         4 $CellContext`h^2) ($CellContext`n - $CellContext`\[Beta]))) 
      Sin[$CellContext`kx $CellContext`t]) 
     Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
@@ -2554,26 +2578,26 @@ Cell[BoxData[
       SuperscriptBox["kx", "3"], " ", 
       SuperscriptBox["ky", "3"]}]]}]}],
   SequenceForm[
-  "T346= ", 
-   Rational[1, 2] $CellContext`ky^(-1) (-$CellContext`ky $CellContext`t 
+  "T346= ", (
+     Rational[1, 2]/$CellContext`ky) (((-$CellContext`ky) $CellContext`t) 
       Cos[$CellContext`ky $CellContext`t] + 
-     Sin[$CellContext`ky $CellContext`t]) + $CellContext`h^2 \
-$CellContext`kx^(-2) $CellContext`ky^(-1) ($CellContext`kx^2 - 
-      4 $CellContext`ky^2)^(-1) (-$CellContext`kx $CellContext`ky 
-      Cos[$CellContext`ky $CellContext`t] 
+     Sin[$CellContext`ky $CellContext`t]) + ((($CellContext`h^2 \
+$CellContext`kx^(-2))/$CellContext`ky)/($CellContext`kx^2 - 
+     4 $CellContext`ky^2)) ((((-$CellContext`kx) $CellContext`ky) 
+       Cos[$CellContext`ky $CellContext`t]) 
       Sin[$CellContext`kx $CellContext`t] + ($CellContext`kx^2 - 
-       2 $CellContext`ky^2 + 
-       2 $CellContext`ky^2 Cos[$CellContext`kx $CellContext`t]) 
-      Sin[$CellContext`ky $CellContext`t]) + $CellContext`h^4 \
-$CellContext`kx^(-3) $CellContext`ky^(-3) (-$CellContext`n + $CellContext`\
-\[Beta]) ($CellContext`kx (-$CellContext`ky $CellContext`t 
+       2 $CellContext`ky^2 + (2 $CellContext`ky^2) 
+        Cos[$CellContext`kx $CellContext`t]) 
+      Sin[$CellContext`ky $CellContext`t]) + ((($CellContext`h^4 \
+$CellContext`kx^(-3)) $CellContext`ky^(-3)) (-$CellContext`n + $CellContext`\
+\[Beta])) ($CellContext`kx (((-$CellContext`ky) $CellContext`t) 
         Cos[$CellContext`ky $CellContext`t] + 
-       Sin[$CellContext`ky $CellContext`t]) + 
-     2 $CellContext`ky^2 ($CellContext`kx^2 - 
-        4 $CellContext`ky^2)^(-1) ((-2) $CellContext`ky 
-        Cos[$CellContext`ky $CellContext`t] 
-        Sin[$CellContext`kx $CellContext`t] + $CellContext`kx (1 + 
-         Cos[$CellContext`kx $CellContext`t]) 
+       Sin[$CellContext`ky $CellContext`t]) + ((
+        2 $CellContext`ky^2)/($CellContext`kx^2 - 
+       4 $CellContext`ky^2)) ((((-2) $CellContext`ky) 
+         Cos[$CellContext`ky $CellContext`t]) 
+        Sin[$CellContext`kx $CellContext`t] + ($CellContext`kx (1 + 
+          Cos[$CellContext`kx $CellContext`t])) 
         Sin[$CellContext`ky $CellContext`t]))],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -2630,16 +2654,16 @@ Cell[BoxData[
      RowBox[{"4", " ", "kx", " ", 
       SuperscriptBox["ky", "2"]}]}]]}],
   SequenceForm[
-  "T413= ", $CellContext`h ($CellContext`kx^3 - 
-     4 $CellContext`kx $CellContext`ky^2)^(-1) 
-   Sin[$CellContext`kx $CellContext`t] ((
-      4 $CellContext`h^2 $CellContext`ky^2 ($CellContext`n - $CellContext`\
-\[Beta]) + $CellContext`kx^2 ($CellContext`ky^2 + 
-        2 $CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta]))) 
-     Cos[$CellContext`ky $CellContext`t] - 
-    2 $CellContext`kx $CellContext`ky ($CellContext`ky^2 + $CellContext`h^2 \
-(-$CellContext`n + $CellContext`\[Beta])) 
-    Cot[Rational[1, 2] $CellContext`kx $CellContext`t] 
+  "T413= ", (($CellContext`h/($CellContext`kx^3 - (
+      4 $CellContext`kx) $CellContext`ky^2)) 
+    Sin[$CellContext`kx $CellContext`t]) ((((
+         4 $CellContext`h^2) $CellContext`ky^2) ($CellContext`n - \
+$CellContext`\[Beta]) + $CellContext`kx^2 ($CellContext`ky^2 + (
+          2 $CellContext`h^2) (-$CellContext`n + $CellContext`\[Beta]))) 
+     Cos[$CellContext`ky $CellContext`t] - ((((
+        2 $CellContext`kx) $CellContext`ky) ($CellContext`ky^2 + \
+$CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta]))) 
+     Cot[(Rational[1, 2] $CellContext`kx) $CellContext`t]) 
     Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -2700,16 +2724,17 @@ Cell[BoxData[
        RowBox[{"4", " ", 
         SuperscriptBox["ky", "2"]}]}], ")"}]}]]}],
   SequenceForm[
-  "T414= ", $CellContext`h $CellContext`kx^(-1) $CellContext`ky^(-1) \
-($CellContext`kx^2 - 
-     4 $CellContext`ky^2)^(-1) ((-4) $CellContext`kx $CellContext`ky \
+  "T414= ", \
+((($CellContext`h/$CellContext`kx)/$CellContext`ky)/($CellContext`kx^2 - 
+    4 $CellContext`ky^2)) ((((((-4) $CellContext`kx) $CellContext`ky) \
 ($CellContext`ky^2 + $CellContext`h^2 (-$CellContext`n + \
-$CellContext`\[Beta])) Cos[$CellContext`ky $CellContext`t] 
-     Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^2 + (
-      4 $CellContext`h^2 $CellContext`ky^2 ($CellContext`n - $CellContext`\
-\[Beta]) + $CellContext`kx^2 ($CellContext`ky^2 + 
-        2 $CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta]))) 
-     Sin[$CellContext`kx $CellContext`t] Sin[$CellContext`ky $CellContext`t])],
+$CellContext`\[Beta]))) Cos[$CellContext`ky $CellContext`t]) 
+     Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^2 + ((((
+          4 $CellContext`h^2) $CellContext`ky^2) ($CellContext`n - \
+$CellContext`\[Beta]) + $CellContext`kx^2 ($CellContext`ky^2 + (
+           2 $CellContext`h^2) (-$CellContext`n + $CellContext`\[Beta]))) 
+      Sin[$CellContext`kx $CellContext`t]) 
+     Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
   3.773583848137712*^9, 
@@ -2767,15 +2792,16 @@ Cell[BoxData[
       SuperscriptBox["kx", "2"], " ", 
       SuperscriptBox["ky", "2"]}]}]]}],
   SequenceForm[
-  "T423= ", $CellContext`h ($CellContext`kx^4 - 
-     4 $CellContext`kx^2 $CellContext`ky^2)^(-1) (
-    2 (4 $CellContext`h^2 $CellContext`ky^2 ($CellContext`n - $CellContext`\
-\[Beta]) + $CellContext`kx^2 ($CellContext`ky^2 + 
-        2 $CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta]))) 
-     Cos[$CellContext`ky $CellContext`t] 
-     Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^2 - 
-    2 $CellContext`kx $CellContext`ky ($CellContext`ky^2 + $CellContext`h^2 \
-(-$CellContext`n + $CellContext`\[Beta])) Sin[$CellContext`kx $CellContext`t] 
+  "T423= ", ($CellContext`h/($CellContext`kx^4 - (
+     4 $CellContext`kx^2) $CellContext`ky^2)) (((
+       2 (((4 $CellContext`h^2) $CellContext`ky^2) ($CellContext`n - \
+$CellContext`\[Beta]) + $CellContext`kx^2 ($CellContext`ky^2 + (
+            2 $CellContext`h^2) (-$CellContext`n + $CellContext`\[Beta])))) 
+      Cos[$CellContext`ky $CellContext`t]) 
+     Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^2 - ((((
+        2 $CellContext`kx) $CellContext`ky) ($CellContext`ky^2 + \
+$CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta]))) 
+     Sin[$CellContext`kx $CellContext`t]) 
     Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -2842,17 +2868,19 @@ Cell[BoxData[
        RowBox[{"4", " ", 
         SuperscriptBox["ky", "2"]}]}], ")"}]}]]}],
   SequenceForm[
-  "T424= ", $CellContext`h $CellContext`kx^(-2) $CellContext`ky^(-1) \
-($CellContext`kx^2 - 4 $CellContext`ky^2)^(-1) (
-    2 $CellContext`kx $CellContext`ky ($CellContext`ky^2 + $CellContext`h^2 \
-(-$CellContext`n + $CellContext`\[Beta])) Cos[$CellContext`ky $CellContext`t] 
-     Sin[$CellContext`kx $CellContext`t] - 
-    2 ($CellContext`kx^2 ($CellContext`ky^2 + $CellContext`h^2 \
-(-$CellContext`n + $CellContext`\[Beta])) 
-      Cos[$CellContext`kx $CellContext`t] + $CellContext`ky^2 \
-($CellContext`kx^2 + 
-       4 $CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta])) 
-      Sin[Rational[1, 2] $CellContext`kx $CellContext`t]^2) 
+  "T424= ", ((($CellContext`h \
+$CellContext`kx^(-2))/$CellContext`ky)/($CellContext`kx^2 - 
+    4 $CellContext`ky^2)) (((((
+         2 $CellContext`kx) $CellContext`ky) ($CellContext`ky^2 + \
+$CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta]))) 
+      Cos[$CellContext`ky $CellContext`t]) 
+     Sin[$CellContext`kx $CellContext`t] - (
+     2 (($CellContext`kx^2 ($CellContext`ky^2 + $CellContext`h^2 \
+(-$CellContext`n + $CellContext`\[Beta]))) 
+       Cos[$CellContext`kx $CellContext`t] + ($CellContext`ky^2 \
+($CellContext`kx^2 + (
+           4 $CellContext`h^2) (-$CellContext`n + $CellContext`\[Beta]))) 
+       Sin[(Rational[1, 2] $CellContext`kx) $CellContext`t]^2)) 
     Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -2960,27 +2988,27 @@ Cell[BoxData[
        RowBox[{"Sin", "[", 
         RowBox[{"ky", " ", "t"}], "]"}]}]}], ")"}]}]}],
   SequenceForm[
-  "T436= ", 
-   Rational[1, 
-     2] $CellContext`kx^(-3) $CellContext`ky^(-1) ($CellContext`kx^2 - 
-     4 $CellContext`ky^2)^(-1) (-$CellContext`ky 
-     Cos[$CellContext`ky $CellContext`t] (-$CellContext`kx ($CellContext`kx^2 - 
-        4 $CellContext`ky^2) $CellContext`t ($CellContext`kx^2 \
-$CellContext`ky^2 + 
-        2 $CellContext`h^4 (-$CellContext`n + $CellContext`\[Beta])) + (
-        2 $CellContext`h^2 $CellContext`kx^2 $CellContext`ky^2 - 
-        4 $CellContext`h^4 ($CellContext`kx^2 - 
-         2 $CellContext`ky^2) ($CellContext`n - $CellContext`\[Beta])) 
-       Sin[$CellContext`kx $CellContext`t]) + $CellContext`kx \
-($CellContext`kx^2 $CellContext`ky^2 ($CellContext`kx^2 - 
-        4 $CellContext`ky^2) + 
-      2 $CellContext`h^2 $CellContext`ky^2 ($CellContext`kx^2 - 
-        2 $CellContext`ky^2) - 
-      2 $CellContext`h^4 ($CellContext`kx^2 - 
-       2 $CellContext`ky^2) ($CellContext`n - $CellContext`\[Beta]) - 
-      4 $CellContext`h^2 $CellContext`ky^2 (-$CellContext`ky^2 + \
-$CellContext`h^2 ($CellContext`n - $CellContext`\[Beta])) 
-      Cos[$CellContext`kx $CellContext`t]) 
+  "T436= ", (((
+      Rational[1, 
+        2] $CellContext`kx^(-3))/$CellContext`ky)/($CellContext`kx^2 - 
+    4 $CellContext`ky^2)) (((-$CellContext`ky) 
+      Cos[$CellContext`ky $CellContext`t]) ((((-$CellContext`kx) \
+($CellContext`kx^2 - 
+          4 $CellContext`ky^2)) $CellContext`t) ($CellContext`kx^2 \
+$CellContext`ky^2 + (
+          2 $CellContext`h^4) (-$CellContext`n + $CellContext`\[Beta])) + (((
+           2 $CellContext`h^2) $CellContext`kx^2) $CellContext`ky^2 - ((
+          4 $CellContext`h^4) ($CellContext`kx^2 - 
+          2 $CellContext`ky^2)) ($CellContext`n - $CellContext`\[Beta])) 
+       Sin[$CellContext`kx $CellContext`t]) + ($CellContext`kx \
+(($CellContext`kx^2 $CellContext`ky^2) ($CellContext`kx^2 - 
+         4 $CellContext`ky^2) + ((
+          2 $CellContext`h^2) $CellContext`ky^2) ($CellContext`kx^2 - 
+         2 $CellContext`ky^2) - ((2 $CellContext`h^4) ($CellContext`kx^2 - 
+         2 $CellContext`ky^2)) ($CellContext`n - $CellContext`\[Beta]) - (((
+          4 $CellContext`h^2) $CellContext`ky^2) (-$CellContext`ky^2 + \
+$CellContext`h^2 ($CellContext`n - $CellContext`\[Beta]))) 
+       Cos[$CellContext`kx $CellContext`t])) 
      Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
  CellChangeTimes->{3.7735803649256783`*^9, 3.7735826562857857`*^9, 
@@ -3057,22 +3085,22 @@ Cell[BoxData[
        RowBox[{"4", " ", 
         SuperscriptBox["ky", "2"]}]}], ")"}]}]]}],
   SequenceForm[
-  "T446= ", 
-   Rational[1, 
-     2] $CellContext`kx^(-3) $CellContext`ky^(-1) ($CellContext`kx^2 - 
-     4 $CellContext`ky^2)^(-1) (
-    8 $CellContext`h^2 $CellContext`kx $CellContext`ky ($CellContext`ky^2 + \
-$CellContext`h^2 (-$CellContext`n + $CellContext`\[Beta])) 
-     Cos[$CellContext`ky $CellContext`t] 
-     Sin[Rational[
-         1, 2] $CellContext`kx $CellContext`t]^2 + ($CellContext`kx \
+  "T446= ", (((
+      Rational[1, 
+        2] $CellContext`kx^(-3))/$CellContext`ky)/($CellContext`kx^2 - 
+    4 $CellContext`ky^2)) ((((((
+          8 $CellContext`h^2) $CellContext`kx) $CellContext`ky) \
+($CellContext`ky^2 + $CellContext`h^2 (-$CellContext`n + \
+$CellContext`\[Beta]))) Cos[$CellContext`ky $CellContext`t]) 
+     Sin[(Rational[
+          1, 2] $CellContext`kx) $CellContext`t]^2 + ((($CellContext`kx \
 ($CellContext`kx^2 - 
-        4 $CellContext`ky^2) $CellContext`t ($CellContext`kx^2 \
-$CellContext`ky^2 + 
-        2 $CellContext`h^4 (-$CellContext`n + $CellContext`\[Beta])) + ((-2) \
-$CellContext`h^2 $CellContext`kx^2 $CellContext`ky^2 + 
-        4 $CellContext`h^4 ($CellContext`kx^2 - 
-          2 $CellContext`ky^2) ($CellContext`n - $CellContext`\[Beta])) 
+          4 $CellContext`ky^2)) $CellContext`t) ($CellContext`kx^2 \
+$CellContext`ky^2 + (
+          2 $CellContext`h^4) (-$CellContext`n + $CellContext`\[Beta])) + \
+((((-2) $CellContext`h^2) $CellContext`kx^2) $CellContext`ky^2 + ((
+           4 $CellContext`h^4) ($CellContext`kx^2 - 
+           2 $CellContext`ky^2)) ($CellContext`n - $CellContext`\[Beta])) 
        Sin[$CellContext`kx $CellContext`t]) 
      Sin[$CellContext`ky $CellContext`t])],
   Editable->False]], "Print",
@@ -3145,62 +3173,62 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 584, 12, 104, "Text",ExpressionUUID->"ddfbbb00-8cdc-45c6-b9cb-a44477f7ce76"],
+Cell[558, 20, 776, 16, 173, "Text",ExpressionUUID->"ddfbbb00-8cdc-45c6-b9cb-a44477f7ce76"],
 Cell[CellGroupData[{
-Cell[1167, 36, 428, 6, 37, "Subsubsection",ExpressionUUID->"1faaa6f2-847e-49c4-a113-e98db55073fb"],
-Cell[1598, 44, 30130, 928, 2344, "Input",ExpressionUUID->"aea7173c-f35f-44bb-9b6f-c3eae90a095f"]
+Cell[1359, 40, 428, 6, 45, "Subsubsection",ExpressionUUID->"1faaa6f2-847e-49c4-a113-e98db55073fb"],
+Cell[1790, 48, 30130, 928, 2344, "Input",ExpressionUUID->"aea7173c-f35f-44bb-9b6f-c3eae90a095f"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[31765, 977, 1429, 20, 45, "Subsubsection",ExpressionUUID->"cc566911-5a12-4ab0-8faa-239cad9614cb"],
+Cell[31957, 981, 1429, 20, 70, "Subsubsection",ExpressionUUID->"cc566911-5a12-4ab0-8faa-239cad9614cb"],
 Cell[CellGroupData[{
-Cell[33219, 1001, 6871, 142, 997, "Input",ExpressionUUID->"9def3432-197a-4fc3-ae5a-58e380b61d32"],
+Cell[33411, 1005, 6871, 142, 70, "Input",ExpressionUUID->"9def3432-197a-4fc3-ae5a-58e380b61d32"],
 Cell[CellGroupData[{
-Cell[40115, 1147, 416, 11, 24, "Print",ExpressionUUID->"474dbc96-f91c-4ee6-85f8-827a86dadd23"],
-Cell[40534, 1160, 461, 12, 41, "Print",ExpressionUUID->"61d8ce20-ddd5-4de7-a5e8-78a1e8bf61b6"],
-Cell[40998, 1174, 594, 16, 42, "Print",ExpressionUUID->"6517797d-d39e-40ce-9f63-6df268644a76"],
-Cell[41595, 1192, 479, 13, 24, "Print",ExpressionUUID->"5ee985e7-b3fe-4140-9ef5-faaa9fc43389"],
-Cell[42077, 1207, 416, 11, 24, "Print",ExpressionUUID->"721bdc42-26f8-4f02-b386-7abfae62e6b6"],
-Cell[42496, 1220, 507, 14, 41, "Print",ExpressionUUID->"1e57fd05-5be8-4379-9a1e-52b7d4e2118a"],
-Cell[43006, 1236, 1354, 38, 45, "Print",ExpressionUUID->"0d1aac2f-8791-4960-bf13-41be0d64e40b"],
-Cell[44363, 1276, 1657, 46, 45, "Print",ExpressionUUID->"5ff12fe8-418f-4e86-9b65-99d94127dcba"],
-Cell[46023, 1324, 2107, 57, 51, "Print",ExpressionUUID->"de0a854c-f2be-4683-bda1-5d3212986655"],
-Cell[48133, 1383, 1441, 39, 51, "Print",ExpressionUUID->"ea841063-5639-48bc-8ee5-e2d754abc0c1"],
-Cell[49577, 1424, 2399, 64, 45, "Print",ExpressionUUID->"332450cd-3c55-474b-822c-2c4c05c8a7ac"],
-Cell[51979, 1490, 2762, 72, 73, "Print",ExpressionUUID->"4b994760-3741-4ea1-b9da-f99ec43d5ebf"],
-Cell[54744, 1564, 1197, 33, 51, "Print",ExpressionUUID->"cdf2af31-6c10-44a9-9001-2dabc9aa10e7"],
-Cell[55944, 1599, 927, 27, 44, "Print",ExpressionUUID->"78671fef-59ab-400c-bc0d-8be3c64aa88c"],
-Cell[56874, 1628, 1168, 32, 51, "Print",ExpressionUUID->"a64e9db0-c4a6-47df-a5cb-26802c42480a"],
-Cell[58045, 1662, 1110, 32, 44, "Print",ExpressionUUID->"3dd379c4-3eb9-4c36-ad26-4acbafc7c1b6"],
-Cell[59158, 1696, 1247, 36, 51, "Print",ExpressionUUID->"c5ada83c-25bd-47db-8c00-411326c1b010"],
-Cell[60408, 1734, 2734, 73, 45, "Print",ExpressionUUID->"240b7d3c-fe22-43cc-bb81-97172bb5594d"],
-Cell[63145, 1809, 1603, 45, 45, "Print",ExpressionUUID->"1cb0a416-4429-4da6-90fe-ad9a09a88c9d"],
-Cell[64751, 1856, 2178, 58, 50, "Print",ExpressionUUID->"0cfc3d32-3d96-46fc-8a97-e980c1798e6c"],
-Cell[66932, 1916, 2852, 79, 45, "Print",ExpressionUUID->"8fb903e6-17f9-45c9-90ac-0bb070fe1d4d"],
-Cell[69787, 1997, 1088, 28, 44, "Print",ExpressionUUID->"e9548b39-0774-4c5d-a951-b3687223a5b2"],
-Cell[70878, 2027, 838, 23, 44, "Print",ExpressionUUID->"80e11f94-ef83-4369-8f0b-6f608284285e"],
-Cell[71719, 2052, 1127, 30, 45, "Print",ExpressionUUID->"ea9a2a7d-2ac2-4d8a-a1e2-e2dc97328a81"],
-Cell[72849, 2084, 418, 11, 24, "Print",ExpressionUUID->"dbfc9b30-9e71-4041-9d09-1dd3967bf64f"],
-Cell[73270, 2097, 461, 12, 44, "Print",ExpressionUUID->"78b78aa8-252a-4b2b-99fe-50072f6a8112"],
-Cell[73734, 2111, 479, 13, 24, "Print",ExpressionUUID->"7982e337-76d6-43d1-b2ff-e1b3dba2993d"],
-Cell[74216, 2126, 416, 11, 24, "Print",ExpressionUUID->"5011fb41-a93a-4ce5-b80d-940e5d9cde98"],
-Cell[74635, 2139, 1904, 50, 54, "Print",ExpressionUUID->"8cbd7035-f569-4871-b01a-65bbb16cd6f9"],
-Cell[76542, 2191, 2069, 55, 54, "Print",ExpressionUUID->"a351b703-7632-4053-8be8-e241778d1114"],
-Cell[78614, 2248, 2929, 76, 48, "Print",ExpressionUUID->"4dcafea6-cffd-4ba2-8834-a9096d2d942e"],
-Cell[81546, 2326, 2105, 58, 56, "Print",ExpressionUUID->"3a65ee7a-a92d-418a-9c4b-6c6d23bbe77f"],
-Cell[83654, 2386, 3026, 82, 54, "Print",ExpressionUUID->"b7cbe200-e1cd-475d-bd44-fc9bca153b21"],
-Cell[86683, 2470, 4145, 111, 109, "Print",ExpressionUUID->"b1fcc7f8-1372-4e0c-8e5b-df891314920a"],
-Cell[90831, 2583, 2400, 64, 53, "Print",ExpressionUUID->"9ad17772-ca2c-4fb4-a411-c84c7745c747"],
-Cell[93234, 2649, 2545, 67, 56, "Print",ExpressionUUID->"cc38c781-8279-4394-b60f-2b689e751833"],
-Cell[95782, 2718, 2476, 65, 54, "Print",ExpressionUUID->"de241ec9-cc51-4d61-90b4-8655721da8a8"],
-Cell[98261, 2785, 2862, 75, 56, "Print",ExpressionUUID->"ac9a4634-82c2-4d29-a761-7ba57ab76e40"],
-Cell[101126, 2862, 4767, 126, 70, "Print",ExpressionUUID->"0acbff20-964a-4958-bb48-27eb1ed523f0"],
-Cell[105896, 2990, 3334, 90, 56, "Print",ExpressionUUID->"0c5adc08-60a1-4229-8952-bb3aa87ab0cf"]
+Cell[40307, 1151, 416, 11, 70, "Print",ExpressionUUID->"474dbc96-f91c-4ee6-85f8-827a86dadd23"],
+Cell[40726, 1164, 461, 12, 70, "Print",ExpressionUUID->"61d8ce20-ddd5-4de7-a5e8-78a1e8bf61b6"],
+Cell[41190, 1178, 596, 16, 70, "Print",ExpressionUUID->"6517797d-d39e-40ce-9f63-6df268644a76"],
+Cell[41789, 1196, 481, 13, 70, "Print",ExpressionUUID->"5ee985e7-b3fe-4140-9ef5-faaa9fc43389"],
+Cell[42273, 1211, 416, 11, 70, "Print",ExpressionUUID->"721bdc42-26f8-4f02-b386-7abfae62e6b6"],
+Cell[42692, 1224, 504, 14, 70, "Print",ExpressionUUID->"1e57fd05-5be8-4379-9a1e-52b7d4e2118a"],
+Cell[43199, 1240, 1369, 38, 70, "Print",ExpressionUUID->"0d1aac2f-8791-4960-bf13-41be0d64e40b"],
+Cell[44571, 1280, 1680, 47, 70, "Print",ExpressionUUID->"5ff12fe8-418f-4e86-9b65-99d94127dcba"],
+Cell[46254, 1329, 2149, 57, 70, "Print",ExpressionUUID->"de0a854c-f2be-4683-bda1-5d3212986655"],
+Cell[48406, 1388, 1469, 40, 70, "Print",ExpressionUUID->"ea841063-5639-48bc-8ee5-e2d754abc0c1"],
+Cell[49878, 1430, 2416, 63, 70, "Print",ExpressionUUID->"332450cd-3c55-474b-822c-2c4c05c8a7ac"],
+Cell[52297, 1495, 2820, 74, 70, "Print",ExpressionUUID->"4b994760-3741-4ea1-b9da-f99ec43d5ebf"],
+Cell[55120, 1571, 1231, 34, 70, "Print",ExpressionUUID->"cdf2af31-6c10-44a9-9001-2dabc9aa10e7"],
+Cell[56354, 1607, 942, 27, 70, "Print",ExpressionUUID->"78671fef-59ab-400c-bc0d-8be3c64aa88c"],
+Cell[57299, 1636, 1201, 34, 70, "Print",ExpressionUUID->"a64e9db0-c4a6-47df-a5cb-26802c42480a"],
+Cell[58503, 1672, 1119, 32, 70, "Print",ExpressionUUID->"3dd379c4-3eb9-4c36-ad26-4acbafc7c1b6"],
+Cell[59625, 1706, 1265, 36, 70, "Print",ExpressionUUID->"c5ada83c-25bd-47db-8c00-411326c1b010"],
+Cell[60893, 1744, 2773, 75, 70, "Print",ExpressionUUID->"240b7d3c-fe22-43cc-bb81-97172bb5594d"],
+Cell[63669, 1821, 1627, 46, 70, "Print",ExpressionUUID->"1cb0a416-4429-4da6-90fe-ad9a09a88c9d"],
+Cell[65299, 1869, 2216, 59, 70, "Print",ExpressionUUID->"0cfc3d32-3d96-46fc-8a97-e980c1798e6c"],
+Cell[67518, 1930, 2877, 79, 70, "Print",ExpressionUUID->"8fb903e6-17f9-45c9-90ac-0bb070fe1d4d"],
+Cell[70398, 2011, 1119, 30, 70, "Print",ExpressionUUID->"e9548b39-0774-4c5d-a951-b3687223a5b2"],
+Cell[71520, 2043, 858, 24, 70, "Print",ExpressionUUID->"80e11f94-ef83-4369-8f0b-6f608284285e"],
+Cell[72381, 2069, 1152, 31, 70, "Print",ExpressionUUID->"ea9a2a7d-2ac2-4d8a-a1e2-e2dc97328a81"],
+Cell[73536, 2102, 418, 11, 70, "Print",ExpressionUUID->"dbfc9b30-9e71-4041-9d09-1dd3967bf64f"],
+Cell[73957, 2115, 461, 12, 70, "Print",ExpressionUUID->"78b78aa8-252a-4b2b-99fe-50072f6a8112"],
+Cell[74421, 2129, 481, 13, 70, "Print",ExpressionUUID->"7982e337-76d6-43d1-b2ff-e1b3dba2993d"],
+Cell[74905, 2144, 416, 11, 70, "Print",ExpressionUUID->"5011fb41-a93a-4ce5-b80d-940e5d9cde98"],
+Cell[75324, 2157, 1955, 53, 70, "Print",ExpressionUUID->"8cbd7035-f569-4871-b01a-65bbb16cd6f9"],
+Cell[77282, 2212, 2109, 57, 70, "Print",ExpressionUUID->"a351b703-7632-4053-8be8-e241778d1114"],
+Cell[79394, 2271, 2969, 77, 70, "Print",ExpressionUUID->"4dcafea6-cffd-4ba2-8834-a9096d2d942e"],
+Cell[82366, 2350, 2124, 58, 70, "Print",ExpressionUUID->"3a65ee7a-a92d-418a-9c4b-6c6d23bbe77f"],
+Cell[84493, 2410, 3071, 82, 70, "Print",ExpressionUUID->"b7cbe200-e1cd-475d-bd44-fc9bca153b21"],
+Cell[87567, 2494, 4172, 111, 70, "Print",ExpressionUUID->"b1fcc7f8-1372-4e0c-8e5b-df891314920a"],
+Cell[91742, 2607, 2429, 64, 70, "Print",ExpressionUUID->"9ad17772-ca2c-4fb4-a411-c84c7745c747"],
+Cell[94174, 2673, 2567, 68, 70, "Print",ExpressionUUID->"cc38c781-8279-4394-b60f-2b689e751833"],
+Cell[96744, 2743, 2513, 66, 70, "Print",ExpressionUUID->"de241ec9-cc51-4d61-90b4-8655721da8a8"],
+Cell[99260, 2811, 2900, 77, 70, "Print",ExpressionUUID->"ac9a4634-82c2-4d29-a761-7ba57ab76e40"],
+Cell[102163, 2890, 4825, 126, 70, "Print",ExpressionUUID->"0acbff20-964a-4958-bb48-27eb1ed523f0"],
+Cell[106991, 3018, 3372, 90, 70, "Print",ExpressionUUID->"0c5adc08-60a1-4229-8952-bb3aa87ab0cf"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[109291, 3087, 345, 5, 45, "Subsubsection",ExpressionUUID->"97a4884b-a305-40f2-9ea6-1c8a16dcc9a0"],
-Cell[109639, 3094, 1893, 31, 136, "Input",ExpressionUUID->"c36927b1-1963-47d6-beaf-1cb838ed4dfd"]
+Cell[110424, 3115, 345, 5, 70, "Subsubsection",ExpressionUUID->"97a4884b-a305-40f2-9ea6-1c8a16dcc9a0"],
+Cell[110772, 3122, 1893, 31, 70, "Input",ExpressionUUID->"c36927b1-1963-47d6-beaf-1cb838ed4dfd"]
 }, Open  ]]
 }
 ]

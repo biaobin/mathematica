@@ -1,3 +1,6 @@
+(* general transfer map for static magnetic elements, such as dipole and quad and sextupole. *)
+(* usage: please see examples/ElementsMap.nb *)
+
 R11 = Cos[kx*t]
  
 R12 = Sin[kx*t]/kx
